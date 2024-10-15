@@ -6,4 +6,6 @@ import com.baomidou.mybatisplus.extension.service.IService;
 public interface ProductService extends IService<Product> {
     String getHotProduct();
     String getOtherProduct();
+    String getProductType();
+    String getProduct(int TypeId);
 }

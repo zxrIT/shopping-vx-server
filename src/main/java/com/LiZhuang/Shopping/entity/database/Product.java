@@ -29,5 +29,11 @@ public class Product {
     @TableField("productType")
     private int productType;
 
+    @TableField("productImageChoice")
+    private String productImageChoice;
+
+    @TableField("originalPrice")
+    private int originalPrice;
+
     private String description;
 }
