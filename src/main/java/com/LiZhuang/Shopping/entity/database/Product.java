@@ -23,6 +23,9 @@ public class Product {
     private boolean collect;
     private int price;
 
+    @TableField("flowerLanguage")
+    private String flowerLanguage;
+
     @TableField("productImage")
     private String productImage;
 
@@ -31,6 +34,8 @@ public class Product {
 
     @TableField("productImageChoice")
     private String productImageChoice;
+
+    private int images;
 
     @TableField("originalPrice")
     private int originalPrice;

@@ -7,5 +7,6 @@ public interface ProductService extends IService<Product> {
     String getHotProduct();
     String getOtherProduct();
     String getProductType();
-    String getProduct(int TypeId);
+    String getProduct(int typeId);
+    String getProductDetails(int id);
 }

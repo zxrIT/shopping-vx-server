@@ -33,4 +33,9 @@ public class ProductController {
     private String getProduct(@PathVariable int id) {
         return productService.getProduct(id);
     }
+
+    @GetMapping("/getProductDetails/{id}")
+    private String getProductDetails(@PathVariable int id) {
+        return productService.getProductDetails(id);
+    }
 }

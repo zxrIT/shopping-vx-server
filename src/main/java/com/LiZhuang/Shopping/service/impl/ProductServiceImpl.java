@@ -76,4 +76,14 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product>
                 BaseResponse.SUCCESS_CODE, BaseResponse.SUCCESS_MESSAGE, productList
         ));
     }
+
+    @Override
+    public String getProductDetails(int id) {
+        Product product = productMapper.selectOne(new QueryWrapper<Product>()
+                .eq("id", id)
+                .eq("productStatus", true));
+        return json.toJson(new ProductResponse<Product>(
+                BaseResponse.SUCCESS_CODE, BaseResponse.SUCCESS_MESSAGE, product
+        ));
+    }
 }
