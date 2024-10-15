@@ -45,6 +45,7 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product>
         List<Product> productList = productMapper.selectList(new QueryWrapper<Product>()
                 .eq("productStatus", true)
                 .eq("isHot", false)
+                .last("limit 8")
         );
         return json.toJson(new ProductResponse<List<Product>>(
                 BaseResponse.SUCCESS_CODE, BaseResponse.SUCCESS_MESSAGE, productList
