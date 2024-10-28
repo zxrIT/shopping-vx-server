@@ -25,4 +25,10 @@ public class CollectController {
     public String allCollect(@PathVariable String userId) {
         return collectService.allCollect(userId);
     }
+
+    @GetMapping("/delete/{userId}/{id}")
+    public String deleteCollect(@PathVariable String userId,
+                                @PathVariable int id) {
+        return collectService.deleteCollect(userId, id);
+    }
 }

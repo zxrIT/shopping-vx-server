@@ -1,5 +1,6 @@
 package com.LiZhuang.Shopping.service.impl;
 
+import com.LiZhuang.Shopping.entity.database.Address;
 import com.LiZhuang.Shopping.entity.database.Collect;
 import com.LiZhuang.Shopping.entity.database.User;
 import com.LiZhuang.Shopping.entity.response.BaseResponse;
@@ -44,6 +45,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
         if (user == null) {
             user = new User();
             Collect collect = new Collect();
+            Address address = new Address();
             String uuid = String.valueOf(UUID.randomUUID());
             user.setId(uuid);
             user.setUsername(username);
@@ -52,6 +54,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
             user.setCollect(uuid);
             user.setAddress(uuid);
             collect.setId(uuid);
+            address.setId(uuid);
             collectMapper.insert(collect);
             userMapper.insert(user);
         }

@@ -63,4 +63,24 @@ public class CollectServiceImpl extends ServiceImpl<CollectMapper, Collect>
                 arrayListCollect
         ));
     }
+
+    @Override
+    public String deleteCollect(String userId, int id) {
+        Collect collect = collectMapper.selectOne(new QueryWrapper<Collect>()
+                .eq("id", userId));
+        if (collect.getProduct1() == id) {
+            collect.setProduct1(0);
+        } else if (collect.getProduct2() == id) {
+            collect.setProduct2(0);
+        } else if (collect.getProduct3() == id) {
+            collect.setProduct3(0);
+        } else if (collect.getProduct4() == id) {
+            collect.setProduct4(0);
+        }
+        collectMapper.updateById(collect);
+        return json.toJson(new CollectResponse<String>(
+                BaseResponse.SUCCESS_CODE, BaseResponse.SUCCESS_MESSAGE
+                , "取消成功"
+        ));
+    }
 }
