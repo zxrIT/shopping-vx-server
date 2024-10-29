@@ -7,4 +7,5 @@ public interface CollectService extends IService<Collect> {
     String addCollect(String userId, int id);
     String allCollect(String userId);
     String deleteCollect(String userId, int id);
+    String getAllCollect(String userId);
 }

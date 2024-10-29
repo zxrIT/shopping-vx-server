@@ -1,9 +1,11 @@
 package com.LiZhuang.Shopping.service.impl;
 
 import com.LiZhuang.Shopping.entity.database.Collect;
+import com.LiZhuang.Shopping.entity.database.Product;
 import com.LiZhuang.Shopping.entity.response.BaseResponse;
 import com.LiZhuang.Shopping.entity.response.collect.CollectResponse;
 import com.LiZhuang.Shopping.mapper.CollectMapper;
+import com.LiZhuang.Shopping.mapper.ProductMapper;
 import com.LiZhuang.Shopping.service.CollectService;
 import com.LiZhuang.Shopping.util.json.Json;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
@@ -19,6 +21,9 @@ public class CollectServiceImpl extends ServiceImpl<CollectMapper, Collect>
         implements CollectService {
     @Autowired
     private CollectMapper collectMapper;
+
+    @Autowired
+    private ProductMapper productMapper;
 
     @Autowired
     private Json json;
@@ -81,6 +86,36 @@ public class CollectServiceImpl extends ServiceImpl<CollectMapper, Collect>
         return json.toJson(new CollectResponse<String>(
                 BaseResponse.SUCCESS_CODE, BaseResponse.SUCCESS_MESSAGE
                 , "取消成功"
+        ));
+    }
+
+    @Override
+    public String getAllCollect(String userId) {
+        ArrayList<Product> productList = new ArrayList<>();
+        Collect collect = collectMapper.selectOne(new QueryWrapper<Collect>()
+                .eq("id", userId));
+        if (collect.getProduct1() != 0) {
+            Product product = productMapper.selectOne(new QueryWrapper<Product>()
+                    .eq("id", collect.getProduct1()));
+            productList.add(product);
+        }
+        if (collect.getProduct2() != 0) {
+            Product product = productMapper.selectOne(new QueryWrapper<Product>()
+                    .eq("id", collect.getProduct2()));
+            productList.add(product);
+        }
+        if (collect.getProduct3() != 0) {
+            Product product = productMapper.selectOne(new QueryWrapper<Product>()
+                    .eq("id", collect.getProduct3()));
+            productList.add(product);
+        }
+        if (collect.getProduct4() != 0) {
+            Product product = productMapper.selectOne(new QueryWrapper<Product>()
+                    .eq("id", collect.getProduct4()));
+            productList.add(product);
+        }
+        return Json.toJson(new CollectResponse<ArrayList<Product>>(
+                BaseResponse.SUCCESS_CODE, BaseResponse.SUCCESS_MESSAGE, productList
         ));
     }
 }

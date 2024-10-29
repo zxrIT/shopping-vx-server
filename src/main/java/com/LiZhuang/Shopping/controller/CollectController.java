@@ -1,6 +1,5 @@
 package com.LiZhuang.Shopping.controller;
 
-import com.LiZhuang.Shopping.entity.database.Collect;
 import com.LiZhuang.Shopping.service.CollectService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -30,5 +29,10 @@ public class CollectController {
     public String deleteCollect(@PathVariable String userId,
                                 @PathVariable int id) {
         return collectService.deleteCollect(userId, id);
+    }
+
+    @GetMapping("/getAllCollect/{userId}")
+    public String getAllCollect(@PathVariable String userId) {
+        return collectService.getAllCollect(userId);
     }
 }
