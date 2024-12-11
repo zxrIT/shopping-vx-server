@@ -1,4 +1,4 @@
-package com.LiZhuang.Shopping.util.json;
+package com.ZengXiangRui.Shopping.util.json;
 
 import com.google.gson.Gson;
 import org.springframework.stereotype.Component;

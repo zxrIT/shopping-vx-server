@@ -1,6 +1,6 @@
 package com.ZengXiangRui.Shopping.controller;
 
-import com.ZengXiangRui.Shopping.service.UserService;
+import com.ZengXiangRui.Shopping.service.ShoppingCartService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -9,13 +9,13 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @SuppressWarnings("all")
-@RequestMapping("/user")
-public class UserController {
+@RequestMapping("/shoppingCart")
+public class ShoppingCartController {
     @Autowired
-    private UserService userService;
+    private ShoppingCartService shoppingCartService;
 
-    @GetMapping("/login/{username}")
-    public String login(@PathVariable String username) {
-        return userService.login(username);
+    @GetMapping("/getAll/{userId}")
+    public String getAll(@PathVariable String userId) {
+        return shoppingCartService.getAll(userId);
     }
 }

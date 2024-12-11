@@ -1,4 +1,4 @@
-package com.LiZhuang.Shopping.entity.database;
+package com.ZengXiangRui.Shopping.entity.database;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;

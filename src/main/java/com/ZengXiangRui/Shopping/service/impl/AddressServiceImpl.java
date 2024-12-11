@@ -1,11 +1,11 @@
-package com.LiZhuang.Shopping.service.impl;
+package com.ZengXiangRui.Shopping.service.impl;
 
-import com.LiZhuang.Shopping.entity.database.Address;
-import com.LiZhuang.Shopping.entity.response.BaseResponse;
-import com.LiZhuang.Shopping.entity.response.address.AddressResponse;
-import com.LiZhuang.Shopping.mapper.AddressMapper;
-import com.LiZhuang.Shopping.service.AddressService;
-import com.LiZhuang.Shopping.util.json.Json;
+import com.ZengXiangRui.Shopping.entity.database.Address;
+import com.ZengXiangRui.Shopping.entity.response.BaseResponse;
+import com.ZengXiangRui.Shopping.entity.response.address.AddressResponse;
+import com.ZengXiangRui.Shopping.mapper.AddressMapper;
+import com.ZengXiangRui.Shopping.service.AddressService;
+import com.ZengXiangRui.Shopping.util.json.Json;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;

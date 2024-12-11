@@ -1,4 +1,4 @@
-package com.LiZhuang.Shopping.util.jwt;
+package com.ZengXiangRui.Shopping.util.jwt;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;

@@ -1,13 +1,13 @@
-package com.LiZhuang.Shopping.service.impl;
+package com.ZengXiangRui.Shopping.service.impl;
 
-import com.LiZhuang.Shopping.entity.database.Collect;
-import com.LiZhuang.Shopping.entity.database.Product;
-import com.LiZhuang.Shopping.entity.response.BaseResponse;
-import com.LiZhuang.Shopping.entity.response.collect.CollectResponse;
-import com.LiZhuang.Shopping.mapper.CollectMapper;
-import com.LiZhuang.Shopping.mapper.ProductMapper;
-import com.LiZhuang.Shopping.service.CollectService;
-import com.LiZhuang.Shopping.util.json.Json;
+import com.ZengXiangRui.Shopping.entity.database.Collect;
+import com.ZengXiangRui.Shopping.entity.database.Product;
+import com.ZengXiangRui.Shopping.entity.response.BaseResponse;
+import com.ZengXiangRui.Shopping.entity.response.collect.CollectResponse;
+import com.ZengXiangRui.Shopping.mapper.CollectMapper;
+import com.ZengXiangRui.Shopping.mapper.ProductMapper;
+import com.ZengXiangRui.Shopping.service.CollectService;
+import com.ZengXiangRui.Shopping.util.json.Json;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;

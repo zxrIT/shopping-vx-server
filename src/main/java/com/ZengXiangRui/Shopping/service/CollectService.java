@@ -1,6 +1,6 @@
-package com.LiZhuang.Shopping.service;
+package com.ZengXiangRui.Shopping.service;
 
-import com.LiZhuang.Shopping.entity.database.Collect;
+import com.ZengXiangRui.Shopping.entity.database.Collect;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 public interface CollectService extends IService<Collect> {

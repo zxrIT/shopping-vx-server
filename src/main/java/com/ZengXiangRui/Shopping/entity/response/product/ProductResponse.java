@@ -1,6 +1,6 @@
-package com.LiZhuang.Shopping.entity.response.product;
+package com.ZengXiangRui.Shopping.entity.response.product;
 
-import com.LiZhuang.Shopping.entity.response.BaseResponse;
+import com.ZengXiangRui.Shopping.entity.response.BaseResponse;
 
 public class ProductResponse<T> extends BaseResponse<T> {
     public ProductResponse(int code, String message, T data) {

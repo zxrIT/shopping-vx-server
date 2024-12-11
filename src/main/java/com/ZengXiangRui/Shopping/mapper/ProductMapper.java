@@ -1,6 +1,6 @@
-package com.LiZhuang.Shopping.mapper;
+package com.ZengXiangRui.Shopping.mapper;
 
-import com.LiZhuang.Shopping.entity.database.Product;
+import com.ZengXiangRui.Shopping.entity.database.Product;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.springframework.stereotype.Repository;
 

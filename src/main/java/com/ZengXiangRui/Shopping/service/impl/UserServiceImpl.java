@@ -1,15 +1,18 @@
-package com.LiZhuang.Shopping.service.impl;
+package com.ZengXiangRui.Shopping.service.impl;
 
-import com.LiZhuang.Shopping.entity.database.Address;
-import com.LiZhuang.Shopping.entity.database.Collect;
-import com.LiZhuang.Shopping.entity.database.User;
-import com.LiZhuang.Shopping.entity.response.BaseResponse;
-import com.LiZhuang.Shopping.entity.response.user.UserResponse;
-import com.LiZhuang.Shopping.mapper.CollectMapper;
-import com.LiZhuang.Shopping.mapper.UserMapper;
-import com.LiZhuang.Shopping.service.UserService;
-import com.LiZhuang.Shopping.util.json.Json;
-import com.LiZhuang.Shopping.util.jwt.Token;
+import com.ZengXiangRui.Shopping.entity.database.Address;
+import com.ZengXiangRui.Shopping.entity.database.Collect;
+import com.ZengXiangRui.Shopping.entity.database.ShoppingCart;
+import com.ZengXiangRui.Shopping.entity.database.User;
+import com.ZengXiangRui.Shopping.entity.response.BaseResponse;
+import com.ZengXiangRui.Shopping.entity.response.user.UserResponse;
+import com.ZengXiangRui.Shopping.mapper.AddressMapper;
+import com.ZengXiangRui.Shopping.mapper.CollectMapper;
+import com.ZengXiangRui.Shopping.mapper.ShoppingCartMapper;
+import com.ZengXiangRui.Shopping.mapper.UserMapper;
+import com.ZengXiangRui.Shopping.service.UserService;
+import com.ZengXiangRui.Shopping.util.json.Json;
+import com.ZengXiangRui.Shopping.util.jwt.Token;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.slf4j.Logger;
@@ -33,6 +36,9 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
     private CollectMapper collectMapper;
 
     @Autowired
+    private ShoppingCartMapper shoppingCartMapper;
+
+    @Autowired
     private Json json;
 
     @Autowired
@@ -46,6 +52,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
             user = new User();
             Collect collect = new Collect();
             Address address = new Address();
+            ShoppingCart shoppingCart = new ShoppingCart();
             String uuid = String.valueOf(UUID.randomUUID());
             user.setId(uuid);
             user.setUsername(username);
@@ -55,8 +62,10 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
             user.setAddress(uuid);
             collect.setId(uuid);
             address.setId(uuid);
+            shoppingCart.setUserId(uuid);
             collectMapper.insert(collect);
             userMapper.insert(user);
+            shoppingCartMapper.insert(shoppingCart);
         }
         return json.toJson(new UserResponse<User>(
                 BaseResponse.SUCCESS_CODE,

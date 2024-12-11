@@ -1,6 +1,6 @@
-package com.LiZhuang.Shopping.service;
+package com.ZengXiangRui.Shopping.service;
 
-import com.LiZhuang.Shopping.entity.database.Address;
+import com.ZengXiangRui.Shopping.entity.database.Address;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 public interface AddressService extends IService<Address> {

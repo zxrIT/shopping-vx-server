@@ -1,6 +1,6 @@
-package com.LiZhuang.Shopping.service;
+package com.ZengXiangRui.Shopping.service;
 
-import com.LiZhuang.Shopping.entity.database.User;
+import com.ZengXiangRui.Shopping.entity.database.User;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 public interface UserService extends IService<User> {

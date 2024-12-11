@@ -1,4 +1,4 @@
-package com.LiZhuang.Shopping.entity.response;
+package com.ZengXiangRui.Shopping.entity.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

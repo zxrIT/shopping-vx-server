@@ -7,14 +7,14 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
 @Data
-@TableName("ProductType")
-public class ProductType {
+@TableName("ShoppingCart")
+public class ShoppingCart {
     @TableId(type = IdType.ASSIGN_UUID)
-    private int id;
-
-    @TableField("typeName")
-    private String typeName;
-
-    @TableField("typeImage")
-    private String typeImage;
+    private Integer id;
+    @TableField("userId")
+    private String userId;
+    private Integer product1;
+    private Integer product2;
+    private Integer product3;
+    private Integer product4;
 }

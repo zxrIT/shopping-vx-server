@@ -1,6 +1,6 @@
-package com.LiZhuang.Shopping.controller;
+package com.ZengXiangRui.Shopping.controller;
 
-import com.LiZhuang.Shopping.service.ProductService;
+import com.ZengXiangRui.Shopping.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;

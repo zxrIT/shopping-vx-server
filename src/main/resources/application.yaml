@@ -4,7 +4,7 @@ server:
     context-path: /
 spring:
   application:
-    name: LiZhuangShopping
+    name: ZengXiangRuiShopping
   datasource:
     username: root
     password: "root1234"
