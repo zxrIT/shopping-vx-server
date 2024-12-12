@@ -18,4 +18,14 @@ public class ShoppingCartController {
     public String getAll(@PathVariable String userId) {
         return shoppingCartService.getAll(userId);
     }
+
+    @GetMapping("/addShoppingCartProduct/{userId}/{productId}")
+    public String addShoppingCartProduct(@PathVariable String userId, @PathVariable int productId) {
+        return shoppingCartService.addShoppingCart(userId, productId);
+    }
+
+    @GetMapping("/deleteShoppingCartProduct/{userId}/{productId}")
+    public String deleteShoppingCartProduct(@PathVariable String userId, @PathVariable int productId) {
+        return shoppingCartService.deleteShoppingCart(userId, productId);
+    }
 }

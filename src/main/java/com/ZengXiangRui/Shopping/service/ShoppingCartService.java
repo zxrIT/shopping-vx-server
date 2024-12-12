@@ -5,4 +5,8 @@ import com.baomidou.mybatisplus.extension.service.IService;
 
 public interface ShoppingCartService extends IService<ShoppingCart> {
     String getAll(String userId);
+
+    String addShoppingCart(String userId, int productId);
+
+    String deleteShoppingCart(String userId, int productId);
 }
