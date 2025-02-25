@@ -2,14 +2,12 @@ package com.ZengXiangRui.Shopping.controller;
 
 import com.ZengXiangRui.Shopping.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @SuppressWarnings("all")
 @RequestMapping("/product")
+@CrossOrigin
 public class ProductController {
     @Autowired
     private ProductService productService;
@@ -17,6 +15,11 @@ public class ProductController {
     @GetMapping("/getHotProduct")
     private String getHotProduct() {
         return productService.getHotProduct();
+    }
+
+    @GetMapping("/admin/getProduct/success")
+    private String getProductSuccess() {
+        return productService.getAdminProductSuccess();
     }
 
     @GetMapping("/getOtherProduct")

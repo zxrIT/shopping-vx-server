@@ -15,10 +15,10 @@ public class Product {
     @TableField("productName")
     private String productName;
 
-    @TableField(value = "productStatus", exist = false)
+    @TableField("productStatus")
     private boolean productStatus;
 
-    @TableField(value = "isHot", exist = false)
+    @TableField("isHot")
     private boolean isHot;
     private boolean collect;
     private int price;

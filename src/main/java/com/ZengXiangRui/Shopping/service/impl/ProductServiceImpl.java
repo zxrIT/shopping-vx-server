@@ -8,6 +8,7 @@ import com.ZengXiangRui.Shopping.mapper.ProductMapper;
 import com.ZengXiangRui.Shopping.mapper.ProductTypeMapper;
 import com.ZengXiangRui.Shopping.service.ProductService;
 import com.ZengXiangRui.Shopping.util.json.Json;
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -85,6 +86,14 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product>
                 .eq("productStatus", true));
         return json.toJson(new ProductResponse<Product>(
                 BaseResponse.SUCCESS_CODE, BaseResponse.SUCCESS_MESSAGE, product
+        ));
+    }
+
+    @Override
+    public String getAdminProductSuccess() {
+        List<Product> products = productMapper.selectList(new LambdaQueryWrapper<Product>());
+        return json.toJson(new ProductResponse<List<Product>>(
+                BaseResponse.SUCCESS_CODE, BaseResponse.SUCCESS_MESSAGE, products
         ));
     }
 }

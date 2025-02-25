@@ -55,7 +55,8 @@ public class AddressServiceImpl extends ServiceImpl<AddressMapper, Address>
 
     @Override
     public String findAllAddress(String userId) {
-        List<Address> addressList = addressMapper.selectList(new QueryWrapper<Address>().eq("id", userId));
+        List<Address> addressList = addressMapper.selectList(new QueryWrapper<Address>()
+                .eq("id", userId));
         return Json.toJson(new AddressResponse<List<Address>>(
                 BaseResponse.SUCCESS_CODE, BaseResponse.SUCCESS_MESSAGE, addressList
         ));

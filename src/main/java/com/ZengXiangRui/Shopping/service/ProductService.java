@@ -9,4 +9,5 @@ public interface ProductService extends IService<Product> {
     String getProductType();
     String getProduct(int typeId);
     String getProductDetails(int id);
+    String getAdminProductSuccess();
 }
