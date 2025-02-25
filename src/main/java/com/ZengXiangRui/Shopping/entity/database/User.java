@@ -12,6 +12,12 @@ public class User {
     private String token;
     private String address;
     private String collect;
+    private String account;
+    private String password;
+    @TableField("userIcon")
+    private String userIcon;
+    @TableField("roleId")
+    private Integer roleId;
     @TableField("shoppingCart")
     private String shoppingCart;
 }

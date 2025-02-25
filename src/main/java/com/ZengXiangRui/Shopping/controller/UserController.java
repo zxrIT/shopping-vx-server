@@ -1,11 +1,10 @@
 package com.ZengXiangRui.Shopping.controller;
 
+import com.ZengXiangRui.Shopping.requestParam.AdminLoginRequestParam;
+import com.ZengXiangRui.Shopping.requestParam.UserRequestParam;
 import com.ZengXiangRui.Shopping.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @SuppressWarnings("all")
@@ -14,8 +13,18 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @GetMapping("/login/{username}")
-    public String login(@PathVariable String username) {
-        return userService.login(username);
+    @PostMapping("/admin/login")
+    private String adminLogin(@RequestBody AdminLoginRequestParam adminLoginRequestParam) {
+        return userService.adminLogin(adminLoginRequestParam);
+    }
+
+    @GetMapping("/get/allUser")
+    private String getAllUser() {
+        return userService.getAllUser();
+    }
+
+    @PostMapping("/login")
+    public String login(@RequestBody UserRequestParam userRequestParam) {
+        return userService.login(userRequestParam.getUsername(), userRequestParam.getAvatarUrl());
     }
 }
