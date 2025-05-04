@@ -44,45 +44,65 @@ public class ShoppingCartServiceImpl extends ServiceImpl<ShoppingCartMapper, Sho
 
     @Override
     public String addShoppingCart(String userId, int productId) {
-        HashMap<String, Integer> shoppingCartPorductMap = new HashMap<String, Integer>();
-        AtomicBoolean shoppingCartCreateStatus = new AtomicBoolean(true);
-        AtomicReference<String> shoppingCartCreateMessage = new AtomicReference<>("添加成功");
-        AtomicInteger shoppingCartCreateVacant = new AtomicInteger();
-        User user = userMapper.selectOne(new QueryWrapper<User>().eq("id", userId));
-        ShoppingCart shoppingCart = shoppingCartMapper.selectOne(new QueryWrapper<ShoppingCart>().eq("userId", user.getShoppingCart()));
-        shoppingCartPorductMap.put("product1", shoppingCart.getProduct1());
-        shoppingCartPorductMap.put("product2", shoppingCart.getProduct2());
-        shoppingCartPorductMap.put("product3", shoppingCart.getProduct3());
-        shoppingCartPorductMap.put("product4", shoppingCart.getProduct4());
-        shoppingCartPorductMap.entrySet().stream().forEach(entry -> {
-            if (entry.getValue() != 0) {
-                shoppingCartCreateVacant.incrementAndGet();
+        try {
+            // 获取用户的购物车
+            User user = userMapper.selectOne(new QueryWrapper<User>().eq("id", userId));
+            ShoppingCart shoppingCart = shoppingCartMapper.selectOne(
+                new QueryWrapper<ShoppingCart>().eq("userId", user.getShoppingCart())
+            );
+            
+            // 检查商品是否已在购物车中
+            if (productId == shoppingCart.getProduct1() ||
+                productId == shoppingCart.getProduct2() ||
+                productId == shoppingCart.getProduct3() ||
+                productId == shoppingCart.getProduct4()) {
+                return json.toJson(new ShoppingCartResponse<String>(
+                    BaseResponse.ERROR_CODE,
+                    BaseResponse.ERROR_MESSAGE,
+                    "商品已在购物车中"
+                ));
             }
-            if (entry.getValue().equals(productId)) {
-                shoppingCartCreateStatus.set(false);
-                shoppingCartCreateMessage.set("购物车已存在");
-                return;
+            
+            // 找到第一个空位置（值为0的位置）
+            if (shoppingCart.getProduct1() == 0) {
+                shoppingCart.setProduct1(productId);
+            } else if (shoppingCart.getProduct2() == 0) {
+                shoppingCart.setProduct2(productId);
+            } else if (shoppingCart.getProduct3() == 0) {
+                shoppingCart.setProduct3(productId);
+            } else if (shoppingCart.getProduct4() == 0) {
+                shoppingCart.setProduct4(productId);
+            } else {
+                return json.toJson(new ShoppingCartResponse<String>(
+                    BaseResponse.ERROR_CODE,
+                    BaseResponse.ERROR_MESSAGE,
+                    "购物车已满，最多添加4件商品"
+                ));
             }
-        });
-        if (shoppingCartCreateStatus.get() == false || shoppingCartCreateVacant.get() == 4) {
+            
+            // 更新购物车
+            int result = shoppingCartMapper.updateById(shoppingCart);
+            if (result > 0) {
+                return json.toJson(new ShoppingCartResponse<String>(
+                    BaseResponse.SUCCESS_CODE,
+                    BaseResponse.SUCCESS_MESSAGE,
+                    "添加成功"
+                ));
+            } else {
+                return json.toJson(new ShoppingCartResponse<String>(
+                    BaseResponse.ERROR_CODE,
+                    BaseResponse.ERROR_MESSAGE,
+                    "添加失败"
+                ));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
             return json.toJson(new ShoppingCartResponse<String>(
-                    BaseResponse.ERROR_CODE, BaseResponse.ERROR_MESSAGE,
-                    shoppingCartCreateStatus.get() == false ? shoppingCartCreateMessage.get() : "最多有4件商品"
+                BaseResponse.ERROR_CODE,
+                BaseResponse.ERROR_MESSAGE,
+                "添加失败：" + e.getMessage()
             ));
         }
-        shoppingCartPorductMap.entrySet().stream().forEach(entry -> {
-            if (entry.getValue() == 0) {
-                entry.setValue(productId);
-            }
-        });
-        shoppingCart.setProduct1(shoppingCartPorductMap.get("product1"));
-        shoppingCart.setProduct2(shoppingCartPorductMap.get("product2"));
-        shoppingCart.setProduct3(shoppingCartPorductMap.get("product3"));
-        shoppingCart.setProduct4(shoppingCartPorductMap.get("product4"));
-        shoppingCartMapper.updateById(shoppingCart);
-        return json.toJson(new ShoppingCartResponse<String>(
-                BaseResponse.SUCCESS_CODE, BaseResponse.SUCCESS_MESSAGE, "添加成功"
-        ));
     }
 
     @Override
@@ -102,5 +122,46 @@ public class ShoppingCartServiceImpl extends ServiceImpl<ShoppingCartMapper, Sho
         return json.toJson(new ShoppingCartResponse<String>(
                 BaseResponse.SUCCESS_CODE, BaseResponse.SUCCESS_MESSAGE, "删除成功"
         ));
+    }
+
+    @Override
+    public String clearShoppingCart(String userId) {
+        try {
+            // 获取用户的购物车
+            User user = userMapper.selectOne(new QueryWrapper<User>().eq("id", userId));
+            ShoppingCart shoppingCart = shoppingCartMapper.selectOne(
+                new QueryWrapper<ShoppingCart>().eq("userId", user.getShoppingCart())
+            );
+            
+            // 清空所有商品
+            shoppingCart.setProduct1(0);
+            shoppingCart.setProduct2(0);
+            shoppingCart.setProduct3(0);
+            shoppingCart.setProduct4(0);
+            
+            // 更新购物车
+            int result = shoppingCartMapper.updateById(shoppingCart);
+            
+            if (result > 0) {
+                return json.toJson(new ShoppingCartResponse<String>(
+                        BaseResponse.SUCCESS_CODE,
+                        BaseResponse.SUCCESS_MESSAGE,
+                        "购物车已清空"
+                ));
+            } else {
+                return json.toJson(new ShoppingCartResponse<String>(
+                        BaseResponse.ERROR_CODE,
+                        BaseResponse.ERROR_MESSAGE,
+                        "清空购物车失败"
+                ));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return json.toJson(new ShoppingCartResponse<String>(
+                    BaseResponse.ERROR_CODE,
+                    BaseResponse.ERROR_MESSAGE,
+                    "清空购物车失败：" + e.getMessage()
+            ));
+        }
     }
 }

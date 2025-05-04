@@ -9,4 +9,6 @@ public interface ShoppingCartService extends IService<ShoppingCart> {
     String addShoppingCart(String userId, int productId);
 
     String deleteShoppingCart(String userId, int productId);
+
+    String clearShoppingCart(String userId);
 }
