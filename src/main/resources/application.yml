@@ -1,0 +1,21 @@
+spring:
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
+  web:
+    resources:
+      static-locations: file:${file.upload.path},classpath:/static/
+      static-path-pattern: /**
+
+server:
+  port: 8080
+
+file:
+  upload:
+    path: /Users/zengxiangrui/IdeaProjects/shopping-vx-server/src/main/resources/static
+
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  mapper-locations: classpath:mybatis/mapper/*.xml 

@@ -1,5 +1,6 @@
 package com.ZengXiangRui.Shopping.controller;
 
+import com.ZengXiangRui.Shopping.entity.database.Product;
 import com.ZengXiangRui.Shopping.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -40,5 +41,20 @@ public class ProductController {
     @GetMapping("/getProductDetails/{id}")
     private String getProductDetails(@PathVariable int id) {
         return productService.getProductDetails(id);
+    }
+
+    @PutMapping("/updateProduct")
+    private String updateProduct(@RequestBody Product product) {
+        return productService.updateProduct(product);
+    }
+
+    @DeleteMapping("/deleteProduct/{id}")
+    private String deleteProduct(@PathVariable int id) {
+        return productService.deleteProduct(id);
+    }
+
+    @PostMapping("/addProduct")
+    private String addProduct(@RequestBody Product product) {
+        return productService.addProduct(product);
     }
 }

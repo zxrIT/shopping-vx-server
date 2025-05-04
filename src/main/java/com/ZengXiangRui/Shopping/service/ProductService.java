@@ -10,4 +10,7 @@ public interface ProductService extends IService<Product> {
     String getProduct(int typeId);
     String getProductDetails(int id);
     String getAdminProductSuccess();
+    String updateProduct(Product product);
+    String deleteProduct(int id);
+    String addProduct(Product product);
 }
