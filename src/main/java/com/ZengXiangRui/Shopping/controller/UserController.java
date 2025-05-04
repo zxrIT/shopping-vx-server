@@ -1,5 +1,6 @@
 package com.ZengXiangRui.Shopping.controller;
 
+import com.ZengXiangRui.Shopping.entity.database.User;
 import com.ZengXiangRui.Shopping.requestParam.AdminLoginRequestParam;
 import com.ZengXiangRui.Shopping.requestParam.UserRequestParam;
 import com.ZengXiangRui.Shopping.service.UserService;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @SuppressWarnings("all")
 @RequestMapping("/user")
+@CrossOrigin
 public class UserController {
     @Autowired
     private UserService userService;
@@ -26,5 +28,20 @@ public class UserController {
     @PostMapping("/login")
     public String login(@RequestBody UserRequestParam userRequestParam) {
         return userService.login(userRequestParam.getUsername(), userRequestParam.getAvatarUrl());
+    }
+
+    @GetMapping("/getUsers")
+    public String getUsers() {
+        return userService.getUsers();
+    }
+
+    @PutMapping("/updateUser")
+    public String updateUser(@RequestBody User user) {
+        return userService.updateUser(user);
+    }
+
+    @DeleteMapping("/deleteUser/{id}")
+    public String deleteUser(@PathVariable String id) {
+        return userService.deleteUser(id);
     }
 }

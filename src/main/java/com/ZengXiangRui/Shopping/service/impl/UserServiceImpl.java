@@ -108,4 +108,100 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
                 BaseResponse.SUCCESS_CODE, BaseResponse.SUCCESS_MESSAGE, user
         ));
     }
+
+    @Override
+    public String getUsers() {
+        try {
+            List<User> users = userMapper.selectList(new QueryWrapper<>());
+            return json.toJson(new UserResponse<List<User>>(
+                    BaseResponse.SUCCESS_CODE,
+                    BaseResponse.SUCCESS_MESSAGE,
+                    users
+            ));
+        } catch (Exception e) {
+            e.printStackTrace();
+            return json.toJson(new UserResponse<String>(
+                    BaseResponse.ERROR_CODE,
+                    BaseResponse.ERROR_MESSAGE,
+                    "获取用户列表失败：" + e.getMessage()
+            ));
+        }
+    }
+
+    @Override
+    public String updateUser(User user) {
+        try {
+            User existingUser = userMapper.selectById(user.getId());
+            if (existingUser == null) {
+                return json.toJson(new UserResponse<String>(
+                        BaseResponse.ERROR_CODE,
+                        BaseResponse.ERROR_MESSAGE,
+                        "用户不存在"
+                ));
+            }
+            // 如果更新了密码，进行MD5加密
+            if (user.getPassword() != null && !user.getPassword().isEmpty()) {
+                user.setPassword(Encryption.encryptToMd5(user.getPassword()));
+            }
+            int result = userMapper.updateById(user);
+            if (result > 0) {
+                return json.toJson(new UserResponse<String>(
+                        BaseResponse.SUCCESS_CODE,
+                        BaseResponse.SUCCESS_MESSAGE,
+                        "更新成功"
+                ));
+            } else {
+                return json.toJson(new UserResponse<String>(
+                        BaseResponse.ERROR_CODE,
+                        BaseResponse.ERROR_MESSAGE,
+                        "更新失败：数据未发生变化"
+                ));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return json.toJson(new UserResponse<String>(
+                    BaseResponse.ERROR_CODE,
+                    BaseResponse.ERROR_MESSAGE,
+                    "更新失败：" + e.getMessage()
+            ));
+        }
+    }
+
+    @Override
+    public String deleteUser(String id) {
+        try {
+            // 检查用户是否存在
+            User existingUser = userMapper.selectById(id);
+            if (existingUser == null) {
+                return json.toJson(new UserResponse<String>(
+                        BaseResponse.ERROR_CODE,
+                        BaseResponse.ERROR_MESSAGE,
+                        "用户不存在"
+                ));
+            }
+
+            // 删除用户
+            int result = userMapper.deleteById(id);
+            if (result > 0) {
+                return json.toJson(new UserResponse<String>(
+                        BaseResponse.SUCCESS_CODE,
+                        BaseResponse.SUCCESS_MESSAGE,
+                        "删除成功"
+                ));
+            } else {
+                return json.toJson(new UserResponse<String>(
+                        BaseResponse.ERROR_CODE,
+                        BaseResponse.ERROR_MESSAGE,
+                        "删除失败"
+                ));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return json.toJson(new UserResponse<String>(
+                    BaseResponse.ERROR_CODE,
+                    BaseResponse.ERROR_MESSAGE,
+                    "删除失败：" + e.getMessage()
+            ));
+        }
+    }
 }

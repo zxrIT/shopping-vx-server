@@ -9,15 +9,23 @@ import lombok.Data;
 public class User {
     private String id;
     private String username;
-    private String token;
-    private String address;
-    private String collect;
     private String account;
     private String password;
-    @TableField("userIcon")
-    private String userIcon;
+    
     @TableField("roleId")
     private Integer roleId;
+    
+    @TableField("userIcon")
+    private String userIcon;
+
+    private String token;
+    
     @TableField("shoppingCart")
     private String shoppingCart;
+    
+    @TableField("collect")
+    private String collect;
+    
+    @TableField("address")
+    private String address;
 }
